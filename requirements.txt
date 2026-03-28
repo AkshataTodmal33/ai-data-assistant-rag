@@ -4,3 +4,5 @@ pandas
 faiss-cpu
 groq
 numpy
+streamlit
+requests
