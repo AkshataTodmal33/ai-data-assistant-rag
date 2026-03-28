@@ -79,3 +79,7 @@ Give short and exact answers."""
     )
 
     return {"answer": response.choices[0].message.content}
+
+@app.get("/")
+def home():
+    return {"message": "AI Data Assistant is running 🚀"}
