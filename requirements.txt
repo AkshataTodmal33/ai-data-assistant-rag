@@ -3,3 +3,4 @@ uvicorn
 pandas
 faiss-cpu
 groq
+numpy
