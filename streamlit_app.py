@@ -7,29 +7,32 @@ st.title("🤖 AI Data Assistant")
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display previous messages
+# Display chat
 for msg in st.session_state.messages:
     st.write(f"{msg['role']}: {msg['content']}")
 
-# User input
+# Input
 user_input = st.text_input("Ask a question")
 
 if st.button("Send"):
     if user_input:
-        # ✅ Call deployed FastAPI
-        response = requests.post(
-            "https://ai-data-assistant-rag.onrender.com/chat",
-            json={"question": user_input}
-        )
+        try:
+            response = requests.post(
+                "https://ai-data-assistant-rag.onrender.com/chat",
+                json={"question": user_input},
+                timeout=10
+            )
 
-        if response.status_code == 200:
-            answer = response.json()["answer"]
+            if response.status_code == 200:
+                answer = response.json().get("answer", "No response")
 
-            # Save messages
-            st.session_state.messages.append({"role": "You", "content": user_input})
-            st.session_state.messages.append({"role": "Bot", "content": answer})
+                st.session_state.messages.append({"role": "You", "content": user_input})
+                st.session_state.messages.append({"role": "Bot", "content": answer})
 
-            st.write(f"You: {user_input}")
-            st.write(f"Bot: {answer}")
-        else:
-            st.error("API Error")
+                st.write(f"You: {user_input}")
+                st.write(f"Bot: {answer}")
+            else:
+                st.error("API returned error")
+
+        except Exception as e:
+            st.error(f"Error: {e}")
