@@ -8,7 +8,18 @@ from groq import Groq
 import os
 
 
-app = FastAPI()
+app = FastAPI(
+    title="AI Data Assistant API",
+    description="""
+This API answers questions based on flight dataset.
+
+Example questions:
+- Which flight has highest delay?
+- What is the price of AI101?
+- Which flight has lowest delay?
+""",
+    version="1.0"
+)
 
 # ✅ CORS
 app.add_middleware(
@@ -43,8 +54,14 @@ index = faiss.IndexFlatL2(dimension)
 index.add(embeddings)
 
 # 📥 Request format
+from pydantic import BaseModel, Field
+
 class Query(BaseModel):
-    question: str
+    question: str = Field(
+        ...,
+        example="Which flight has highest delay?",
+        description="Ask any question about flight delay, price, or flight details"
+    )
 
 # 🔍 Search
 def search(query):
