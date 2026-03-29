@@ -16,17 +16,20 @@ user_input = st.text_input("Ask a question")
 
 if st.button("Send"):
     if user_input:
-        # Call FastAPI
+        # ✅ Call deployed FastAPI
         response = requests.post(
-            "http://127.0.0.1:8000/chat",
+            "https://ai-data-assistant-rag.onrender.com/chat",
             json={"question": user_input}
         )
 
-        answer = response.json()["answer"]
+        if response.status_code == 200:
+            answer = response.json()["answer"]
 
-        # Save messages
-        st.session_state.messages.append({"role": "You", "content": user_input})
-        st.session_state.messages.append({"role": "Bot", "content": answer})
+            # Save messages
+            st.session_state.messages.append({"role": "You", "content": user_input})
+            st.session_state.messages.append({"role": "Bot", "content": answer})
 
-        st.write(f"You: {user_input}")
-        st.write(f"Bot: {answer}")
+            st.write(f"You: {user_input}")
+            st.write(f"Bot: {answer}")
+        else:
+            st.error("API Error")
