@@ -39,5 +39,7 @@ ai-data-assistant-rag/
 │
 └── ai-chat-ui/           # UI components (if used)
 
+---
+
 🚀 Architecture
 User → Streamlit UI → FastAPI → FAISS → LLM (Groq) → Response
