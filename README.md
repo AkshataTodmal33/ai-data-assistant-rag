@@ -2,6 +2,8 @@
 
 An intelligent chatbot that answers questions from structured data using Retrieval-Augmented Generation (RAG).
 
+--
+
 🚀 Features
 🔍 Semantic search using FAISS
 🧠 Lightweight embeddings (optimized for fast deployment)
@@ -9,6 +11,9 @@ An intelligent chatbot that answers questions from structured data using Retriev
 ⚡ Scalable backend using FastAPI
 📊 Supports CSV-based structured datasets (Flight data)
 ☁️ Fully deployed on cloud (Render + Streamlit Cloud)
+
+--
+
 🛠️ Tech Stack
 Python
 FastAPI
@@ -16,7 +21,11 @@ FAISS
 Groq LLM
 Streamlit
 React (Optional UI)
+
+--
+
 📂 Project Structure
+
 ai-data-assistant-rag/
 │
 ├── api.py                # FastAPI backend
@@ -29,8 +38,14 @@ ai-data-assistant-rag/
 ├── chatbot.py            # Chat processing
 │
 └── ai-chat-ui/           # UI components (optional)
+
+--
+
 🚀 Architecture
 User → Streamlit UI → FastAPI → FAISS → LLM (Groq) → Response
+
+--
+
 🔗 Live Links
 🌐 Live App: https://ai-data-assistant-rag-6pyxyvawoj7mu42iqigze9.streamlit.app/
 📘 API Docs: https://ai-data-assistant-rag.onrender.com/docs
